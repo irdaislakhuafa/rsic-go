@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/irdaislakhuafa/rsic-go/files"
 	imageUsecase "github.com/irdaislakhuafa/rsic-go/src/usecase/image"
-	"github.com/irdaislakhuafa/rsic-go/src/utility"
 )
 
 func main() {
@@ -31,7 +31,7 @@ func ReplaceSpecificImgColor(sourceImg, outputImg string) error {
 	defer sourceFile.Close()
 
 	// get file extension
-	sourceImgExt, err := utility.GetFileExtension(sourceImg)
+	sourceImgExt, err := files.GetFileExtension(sourceImg)
 	if err != nil {
 		return err
 	}
