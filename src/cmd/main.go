@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/irdaislakhuafa/rsic-go/files"
-	imageUsecase "github.com/irdaislakhuafa/rsic-go/src/usecase/image"
+	imageUsecase "github.com/irdaislakhuafa/rsic-go/images"
 )
 
 func main() {
