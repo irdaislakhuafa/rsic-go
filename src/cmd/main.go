@@ -12,6 +12,11 @@ import (
 )
 
 func main() {
+	// a := imgErr.New("xxx")
+	// b := imgErr.New("xx")
+	// c := imgErr.New("xx")
+	// err := errors.Join(a, b)
+	// fmt.Printf("a: %v\n", errors.Is(err, c))
 	// TODO: set this as parameter/flags
 	// path of needed image files
 	sourceImg := "docs/img/4.2.png"
