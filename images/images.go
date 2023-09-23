@@ -52,7 +52,7 @@ func GetSupportedFormat() []string {
 }
 
 // replace specific color from image and return image.RGBA if success
-func ReplaceSpecificImgColorWithWrite(sourceImg, outputImg string) (string, error) {
+func ReplaceSpecificImgColorWithWrite(sourceImg, outputImg string, requiredColor, replacementColor color.RGBA) (string, error) {
 	sourceImgExt, err := files.GetFileExtension(sourceImg)
 	if err != nil {
 		return "", err
@@ -63,7 +63,7 @@ func ReplaceSpecificImgColorWithWrite(sourceImg, outputImg string) (string, erro
 		return "", err
 	}
 
-	newOutputImg, err := ReplaceSpecificImgColorWithoutWrite(sourceImg)
+	newOutputImg, err := ReplaceSpecificImgColorWithoutWrite(sourceImg, requiredColor, replacementColor)
 	if err != nil {
 		return "", err
 	}
@@ -96,7 +96,7 @@ func ReplaceSpecificImgColorWithWrite(sourceImg, outputImg string) (string, erro
 	return fmt.Sprintf("image processing complete and saved to %v", outputImg), nil
 }
 
-func ReplaceSpecificImgColorWithoutWrite(sourceImg string) (*image.RGBA, error) {
+func ReplaceSpecificImgColorWithoutWrite(sourceImg string, requiredColor, replacementColor color.RGBA) (*image.RGBA, error) {
 	// open source image file
 	sourceFile, err := os.Open(sourceImg)
 	if err != nil {
@@ -125,10 +125,6 @@ func ReplaceSpecificImgColorWithoutWrite(sourceImg string) (*image.RGBA, error) 
 	srcImgWidth := decodedSrcImg.Bounds().Dx()
 	srcImgHeight := decodedSrcImg.Bounds().Dy()
 	newOutputImg := image.NewRGBA(image.Rect(0, 0, srcImgWidth, srcImgHeight))
-
-	// TODO: set this in args/parameter
-	requiredColor := color.RGBA{R: 14, G: 14, B: 18, A: 255}
-	replacementColor := color.RGBA{R: 244, G: 245, B: 245, A: 255}
 
 	// loop each pixel of image, compare current pixel color with required color and if match change it with replacement color
 	for width := 0; width < srcImgWidth; width++ {
